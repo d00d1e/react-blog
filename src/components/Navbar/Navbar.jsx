@@ -1,6 +1,6 @@
 import React from "react";
 
-import iconImg from "../../img/unnamed.jpeg";
+import iconImg from "../../assets/img/unnamed.jpeg";
 import "./Navbar.css";
 
 export default function Navbar() {
