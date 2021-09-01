@@ -1,0 +1,59 @@
+.postDetail {
+  flex: 9;
+}
+
+.postDetailWrapper {
+  padding: 20px;
+  padding-right: 0;
+}
+
+.postDetailImg {
+  width: 100%;
+  height: 500px;
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+.postDetailTitle {
+  text-align: center;
+  font-family: "Lora", serif;
+  font-size: 2.5rem;
+}
+
+.postDetailEdit {
+  float: right;
+  font-size: 16px;
+}
+
+.postDetailIcon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.postDetailIcon:first-child {
+  color: teal;
+}
+
+.postDetailIcon:last-child {
+  color: tomato;
+}
+
+.postDetailInfo {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Varela Round", sans-serif;
+  font-size: 16px;
+  color: #999;
+}
+
+.postDetailDescription {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.postDetailDescription::first-letter {
+  margin-left: 20px;
+  font-size: 30px;
+  font-weight: 600;
+}
