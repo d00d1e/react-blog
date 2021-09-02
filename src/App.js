@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import Postpage from "./pages/PostPage/PostPage";
 import Settings from "./pages/Settings/Settings";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 export default function App() {
   return (
@@ -15,7 +16,8 @@ export default function App() {
       {/* <Postpage /> */}
       {/* <Write /> */}
       {/* <Settings /> */}
-      <Login />
+      {/* <Login /> */}
+      <Register />
     </>
   );
 }
