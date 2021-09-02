@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
 import Write from "./pages/Write/Write";
@@ -10,14 +11,16 @@ import Register from "./pages/Register/Register";
 
 export default function App() {
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
-      {/* <Home /> */}
-      {/* <Postpage /> */}
-      {/* <Write /> */}
-      {/* <Settings /> */}
-      {/* <Login /> */}
-      <Register />
-    </>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/post/:postId" component={Postpage} />
+        <Route exact path="/write" component={Write} />
+        <Route exact path="/settings" component={Settings} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+      </Switch>
+    </BrowserRouter>
   );
 }
