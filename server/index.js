@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import authRouter from "./routers/authRouter.js";
+import userRouter from "./routers/userRouter.js";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //ROUTERS
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 
 //DATABASE
 mongoose
