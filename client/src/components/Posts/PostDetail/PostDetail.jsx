@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
-import postDetailImg from "../../../assets/img/postimg.jpg";
 import "./PostDetail.css";
 
 export default function PostDetail() {
+  const [post, setPost] = useState({});
+  const location = useLocation();
+  const pathname = location.pathname.split("/")[2];
+
+  useEffect(() => {
+    const getPost = async () => {
+      const { data } = await axios.get(`/posts/${pathname}`);
+      setPost(data);
+    };
+
+    getPost();
+  }, [pathname]);
+
   return (
     <div className="postDetail">
       <div className="postDetailWrapper">
-        <img src={postDetailImg} alt="" className="postDetailImg" />
+        {post.postImg && (
+          <img className="postImg" src={post.postImg} alt={post.title} />
+        )}
         <h1 className="postDetailTitle">
-          Did you know Orchids can be fragrant?
+          {post.title}
           <div className="postDetailEdit">
             <i className="postDetailIcon far fa-edit"></i>
             <i className="postDetailIcon far fa-trash-alt"></i>
@@ -17,23 +33,13 @@ export default function PostDetail() {
         </h1>
         <div className="postDetailInfo">
           <span className="postDetailAuthor">
-            Author: <b>J.Lee</b>
+            Author: <b>{post.username}</b>
           </span>
-          <span className="postDetailDate">1 hour ago</span>
+          <span className="postDetailDate">
+            {new Date(post.createdAt).toDateString()}
+          </span>
         </div>
-        <p className="postDetailDescription">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-          voluptates itaque culpa incidunt nemo dicta provident rem eligendi
-          suscipit possimus praesentium officiis, animi, dolor distinctio
-          molestias minima aliquam. Cum, saepe. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Eveniet voluptates itaque culpa incidunt
-          nemo dicta provident rem eligendi suscipit possimus praesentium
-          officiis, animi, dolor distinctio molestias minima aliquam. Cum,
-          saepe. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eveniet voluptates itaque culpa incidunt nemo dicta provident rem
-          eligendi suscipit possimus praesentium officiis, animi, dolor
-          distinctio molestias minima aliquam. Cum, saepe.
-        </p>
+        <p className="postDetailDescription">{post.desc}</p>
       </div>
     </div>
   );

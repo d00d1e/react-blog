@@ -1,35 +1,32 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-import postImg from "../../../assets/img/postimg.jpg";
 import "./Post.css";
 
-export default function Post() {
+export default function Post({ post }) {
   return (
     <div className="post">
-      <img className="postImg" src={postImg} alt="post img" />
+      {post.postImg && (
+        <img className="postImg" src={post.postImg} alt="post img" />
+      )}
       <div className="postInfo">
         <div className="postCategories">
-          <div className="postCategory">Plants</div>
-          <div className="postCategory">Life</div>
+          {post.categories.map((category, i) => (
+            <div key={i} className="postCategory">
+              {category.name}
+            </div>
+          ))}
         </div>
-        <span className="postTitle">Did you know Orchids can be fragrant?</span>
+        <Link className="link" to={`/post/${post._id}`}>
+          <span className="postTitle">{post.title}</span>
+        </Link>
         <hr />
-        <span className="postDate">1 hour ago</span>
+        <span className="postDate">
+          {new Date(post.createdAt).toDateString()}
+        </span>
       </div>
       <div className="postDescription">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-          voluptates itaque culpa incidunt nemo dicta provident rem eligendi
-          suscipit possimus praesentium officiis, animi, dolor distinctio
-          molestias minima aliquam. Cum, saepe. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Eveniet voluptates itaque culpa incidunt
-          nemo dicta provident rem eligendi suscipit possimus praesentium
-          officiis, animi, dolor distinctio molestias minima aliquam. Cum,
-          saepe. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eveniet voluptates itaque culpa incidunt nemo dicta provident rem
-          eligendi suscipit possimus praesentium officiis, animi, dolor
-          distinctio molestias minima aliquam. Cum, saepe.
-        </p>
+        <p>{post.desc}</p>
       </div>
     </div>
   );
