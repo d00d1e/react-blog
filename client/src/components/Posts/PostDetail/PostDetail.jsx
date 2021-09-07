@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import "./PostDetail.css";
@@ -33,7 +33,10 @@ export default function PostDetail() {
         </h1>
         <div className="postDetailInfo">
           <span className="postDetailAuthor">
-            Author: <b>{post.username}</b>
+            Author:{" "}
+            <Link className="link" to={`/?user=${post.username}`}>
+              <b>{post.username}</b>
+            </Link>
           </span>
           <span className="postDetailDate">
             {new Date(post.createdAt).toDateString()}

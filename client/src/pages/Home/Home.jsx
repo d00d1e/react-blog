@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 import Header from "../../components/Header/Header";
@@ -8,16 +9,17 @@ import "./Home.css";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const { search } = useLocation();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data } = await axios.get("/posts");
+      const { data } = await axios.get(`/posts/${search}`);
 
       setPosts(data);
     };
 
     fetchPosts();
-  }, []);
+  }, [search]);
 
   return (
     <>

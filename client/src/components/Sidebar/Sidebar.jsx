@@ -3,6 +3,7 @@ import axios from "axios";
 
 import sidebarImg from "../../assets/img/unnamed.jpeg";
 import "./Sidebar.css";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [categories, setCategories] = useState([]);
@@ -30,9 +31,9 @@ export default function Sidebar() {
         <span className="sidebarTitle">Categories</span>
         <ul className="sidebarList">
           {categories.map((category, i) => (
-            <li key={i} className="sidebarListItem">
-              {category.name}
-            </li>
+            <Link key={i} className="link" to={`/category=${category.name}`}>
+              <li className="sidebarListItem">{category.name}</li>
+            </Link>
           ))}
         </ul>
       </div>
