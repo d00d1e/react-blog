@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import iconImg from "../../assets/img/arhi.png";
+import { LOGOUT } from "../../context/constants";
 import { Context } from "../../context/context";
+
+import iconImg from "../../assets/img/arhi.png";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const { user } = useContext(Context);
+  const { user, dispatch } = useContext(Context);
+
+  const handleLogout = () => {
+    dispatch({ type: LOGOUT });
+  };
 
   return (
     <div className="navbar">
@@ -41,7 +47,7 @@ export default function Navbar() {
           </li>
           {user && (
             <li className="navListItem">
-              <Link className="link" to="/login">
+              <Link className="link" to="/login" onClick={handleLogout}>
                 Logout
               </Link>
             </li>

@@ -1,6 +1,6 @@
-import { LOGIN_FAIL, LOGIN_START, LOGIN_SUCCESS } from "./constants";
+import { LOGIN_FAIL, LOGIN_START, LOGIN_SUCCESS, LOGOUT } from "./constants";
 
-export const LoginReducer = (state, action) => {
+export const Reducers = (state, action) => {
   switch (action.type) {
     case LOGIN_START:
       return {
@@ -15,6 +15,12 @@ export const LoginReducer = (state, action) => {
         error: false,
       };
     case LOGIN_FAIL:
+      return {
+        user: null,
+        isFetching: false,
+        error: false,
+      };
+    case LOGOUT:
       return {
         user: null,
         isFetching: false,
