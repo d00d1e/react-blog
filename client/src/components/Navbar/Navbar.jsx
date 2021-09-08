@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import iconImg from "../../assets/img/arhi.png";
+import { Context } from "../../context/context";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const user = false;
+  const { user } = useContext(Context);
 
   return (
     <div className="navbar">
