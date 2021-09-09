@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { LOGOUT } from "../../context/constants";
 import { Context } from "../../context/context";
 
-import iconImg from "../../assets/img/arhi.png";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -58,7 +57,7 @@ export default function Navbar() {
       <div className="navRight">
         {user ? (
           <Link className="link" to="/settings">
-            <img className="navImg" src={iconImg} alt="Profile Img" />
+            <img className="navImg" src={user.profileImg} alt="Profile Img" />
           </Link>
         ) : (
           <ul className="navList">
