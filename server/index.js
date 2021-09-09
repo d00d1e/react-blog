@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const __dirname = path.resolve();
-app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 //ROUTERS
 app.use("/api/auth", authRouter);
@@ -33,7 +33,7 @@ mongoose
 //STORAGE
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    cb(null, "uploads");
   },
   filename: (req, file, cb) => {
     cb(null, req.body.name);
