@@ -9,6 +9,8 @@ export default function PostDetail() {
   const location = useLocation();
   const pathname = location.pathname.split("/")[2];
 
+  const publicFolder = "http://localhost:5000/images/";
+
   useEffect(() => {
     const getPost = async () => {
       const { data } = await axios.get(`/posts/${pathname}`);
@@ -22,7 +24,11 @@ export default function PostDetail() {
     <div className="postDetail">
       <div className="postDetailWrapper">
         {post.postImg && (
-          <img className="postImg" src={post.postImg} alt={post.title} />
+          <img
+            className="postDetailImg"
+            src={publicFolder + post.postImg}
+            alt={post.title}
+          />
         )}
         <h1 className="postDetailTitle">
           {post.title}

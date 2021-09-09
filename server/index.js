@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import multer from "multer";
+import path from "path";
 
 import authRouter from "./routers/authRouter.js";
 import userRouter from "./routers/userRouter.js";
@@ -13,6 +14,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const __dirname = path.resolve();
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 //ROUTERS
 app.use("/api/auth", authRouter);
