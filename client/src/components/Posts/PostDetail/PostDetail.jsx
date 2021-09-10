@@ -7,6 +7,10 @@ import "./PostDetail.css";
 
 export default function PostDetail() {
   const [post, setPost] = useState({});
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [editMode, setEditMode] = useState(false);
+
   const location = useLocation();
   const pathname = location.pathname.split("/")[2];
   const publicFolder = "http://localhost:5000/uploads/";
@@ -16,6 +20,8 @@ export default function PostDetail() {
     const getPost = async () => {
       const { data } = await axios.get(`/posts/${pathname}`);
       setPost(data);
+      setTitle(data.title);
+      setDescription(data.desc);
     };
 
     getPost();
@@ -33,6 +39,21 @@ export default function PostDetail() {
     }
   };
 
+  const handleUpdate = async () => {
+    try {
+      await axios.put(`/posts/${post._id}`, {
+        username: user.username,
+        title,
+        desc: description,
+      });
+
+      // window.location.reload();
+      setEditMode(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="postDetail">
       <div className="postDetailWrapper">
@@ -43,18 +64,33 @@ export default function PostDetail() {
             alt={post.title}
           />
         )}
-        <h1 className="postDetailTitle">
-          {post.title}
-          {post.username === user?.username && (
-            <div className="postDetailEdit">
-              <i className="postDetailIcon far fa-edit"></i>
-              <i
-                className="postDetailIcon far fa-trash-alt"
-                onClick={handleDelete}
-              ></i>
-            </div>
-          )}
-        </h1>
+
+        {editMode ? (
+          <input
+            className="editTitleInput"
+            type="text"
+            value={title}
+            autoFocus
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        ) : (
+          <h1 className="postDetailTitle">
+            {title}
+            {post.username === user?.username && (
+              <div className="postDetailEdit">
+                <i
+                  className="postDetailIcon far fa-edit"
+                  onClick={() => setEditMode(true)}
+                ></i>
+                <i
+                  className="postDetailIcon far fa-trash-alt"
+                  onClick={handleDelete}
+                ></i>
+              </div>
+            )}
+          </h1>
+        )}
+
         <div className="postDetailInfo">
           <span className="postDetailAuthor">
             Author:{" "}
@@ -66,7 +102,22 @@ export default function PostDetail() {
             {new Date(post.createdAt).toDateString()}
           </span>
         </div>
-        <p className="postDetailDescription">{post.desc}</p>
+
+        {editMode ? (
+          <textarea
+            className="editDescriptionInput"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        ) : (
+          <p className="postDetailDescription">{description}</p>
+        )}
+
+        {editMode && (
+          <button className="editButton" onClick={handleUpdate}>
+            Update
+          </button>
+        )}
       </div>
     </div>
   );
