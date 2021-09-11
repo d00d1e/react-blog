@@ -8,6 +8,7 @@ import "./Navbar.css";
 
 export default function Navbar() {
   const { user, dispatch } = useContext(Context);
+  const publicFolder = "http://localhost:5000/uploads/";
 
   const handleLogout = () => {
     dispatch({ type: LOGOUT });
@@ -57,7 +58,11 @@ export default function Navbar() {
       <div className="navRight">
         {user ? (
           <Link className="link" to="/settings">
-            <img className="navImg" src={user.profileImg} alt="Profile Img" />
+            <img
+              className="navImg"
+              src={publicFolder + user.profileImg}
+              alt=""
+            />
           </Link>
         ) : (
           <ul className="navList">

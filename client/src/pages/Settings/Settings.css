@@ -45,6 +45,10 @@
   border-bottom: 1px solid lightgray;
 }
 
+.settingsForm > input:focus {
+  outline: none;
+}
+
 .settingsProfileImg {
   display: flex;
   align-items: center;
@@ -74,8 +78,9 @@
   cursor: pointer;
 }
 
-.settingsProfileImgInput {
+#fileInput {
   width: 30%;
+  display: none;
 }
 
 .settingsSubmitButton {
@@ -99,4 +104,10 @@
 
 .settingsSubmitButton:hover {
   background-color: rgb(1, 114, 114);
+}
+
+.updatedProfileMessage {
+  color: green;
+  text-align: center;
+  margin-top: 20px;
 }
